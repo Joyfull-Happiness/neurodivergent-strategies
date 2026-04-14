@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuro Spicy Parts Quiz — Neurodivergent Strategies</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --electric-blue: #2d5fff;
+    --vivid-purple: #7b2ff7;
+    --hot-pink: #ff2d87;
+    --golden: #ffb800;
+    --cyan: #00e5ff;
+    --dark-bg: #0f0e2a;
+    --card-bg: #1a1940;
+    --light-text: #f0eeff;
+    --muted-text: #b8b5d0;
+    --gradient-hero: linear-gradient(135deg, #0f0e2a 0%, #1e1350 40%, #2a1065 70%, #3d0d80 100%);
+    --gradient-cta: linear-gradient(135deg, #ff2d87, #ff6b3d, #ffb800);
+    --gradient-blue: linear-gradient(135deg, #2d5fff, #00e5ff);
+    --gradient-purple: linear-gradient(135deg, #7b2ff7, #ff2d87);
+    --exile-color: #ff6b3d;
+    --manager-color: #b07aff;
+    --firefighter-color: #00e5ff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark-bg);
+    color: var(--light-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  .quiz-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    background: rgba(15, 14, 42, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(123, 47, 247, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .quiz-nav-logo {
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+  }
+
+  .quiz-progress-wrap {
+    flex: 1;
+    max-width: 350px;
+    margin: 0 2rem;
+  }
+
+  .quiz-progress-bar {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .quiz-progress-fill {
+    height: 100%;
+    background: var(--gradient-cta);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-progress-label {
+    font-size: 0.72rem;
+    color: var(--muted-text);
+    margin-top: 0.4rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .nav-counter {
+    font-size: 0.8rem;
+    color: var(--muted-text);
+    font-weight: 700;
+  }
+
+  /* ── QUIZ BODY ── */
+  .quiz-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 4rem 2rem 5rem;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .q-category {
+    display: none;
+  }
+
+  .q-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    line-height: 1.6;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 2.5rem;
+    text-align: center;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+  }
+
+  .opt {
+    background: var(--card-bg);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 1.1rem 1.5rem;
+    font-size: 1rem;
+    color: var(--muted-text);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+  }
+
+  .opt:hover {
+    border-color: var(--vivid-purple);
+    color: #fff;
+    background: rgba(123, 47, 247, 0.1);
+  }
+
+  .opt.selected {
+    border-color: var(--hot-pink);
+    background: rgba(255, 45, 135, 0.1);
+    color: #fff;
+    font-weight: 800;
+    box-shadow: 0 0 20px rgba(255, 45, 135, 0.15);
+  }
+
+  .quiz-nav-btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .btn-back {
+    background: none;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    padding: 0.8rem 1.8rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--muted-text);
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover { border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+  .btn-back:disabled { opacity: 0.2; cursor: default; }
+
+  .btn-next {
+    background: var(--gradient-cta);
+    border: none;
+    border-radius: 50px;
+    padding: 0.8rem 2.2rem;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 45, 135, 0.25);
+  }
+
+  .btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255, 45, 135, 0.4); }
+  .btn-next:disabled { opacity: 0.25; cursor: default; transform: none; box-shadow: none; }
+
+  /* ── EMAIL GATE ── */
+  #email-page {
+    display: none;
+    min-height: 100vh;
+    background: var(--gradient-hero);
+  }
+
+  .email-body {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .email-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .email-title {
+    font-family: 'Bangers', cursive;
+    font-size: 2.8rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--golden), var(--hot-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .email-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted-text);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+
+  .email-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .email-input {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem 1.4rem;
+    border-radius: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input::placeholder { color: rgba(184, 181, 208, 0.4); }
+  .email-input:focus { border-color: var(--hot-pink); }
+
+  .email-submit {
+    background: var(--gradient-cta);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 900;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(255, 45, 135, 0.35);
+  }
+
+  .email-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255, 45, 135, 0.5);
+  }
+
+  .email-submit:disabled {
+    opacity: 0.4;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .email-privacy {
+    font-size: 0.78rem;
+    color: rgba(184, 181, 208, 0.4);
+    margin-top: 0.5rem;
+  }
+
+  .email-error {
+    color: var(--hot-pink);
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: none;
+  }
+
+  /* ── RESULTS ── */
+  #results-page {
+    display: none;
+    min-height: 100vh;
+    background: var(--dark-bg);
+  }
+
+  .results-hero {
+    background: var(--gradient-hero);
+    padding: 5rem 2rem 3.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .results-hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 45, 135, 0.1), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .results-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--golden);
+    margin-bottom: 1.2rem;
+    position: relative;
+  }
+
+  .results-title {
+    font-family: 'Bangers', cursive;
+    font-size: 3.2rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #fff 30%, var(--cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+  }
+
+  .results-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted-text);
+    line-height: 1.8;
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .results-body {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+  }
+
+  .result-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+  }
+
+  .result-card.exile::before { background: var(--gradient-cta); }
+  .result-card.manager::before { background: var(--gradient-purple); }
+  .result-card.firefighter::before { background: var(--gradient-blue); }
+
+  .result-rank {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    margin-bottom: 0.6rem;
+  }
+
+  .result-name {
+    font-family: 'Bangers', cursive;
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .result-type-pill {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .exile .result-type-pill { background: rgba(255, 107, 61, 0.15); color: var(--exile-color); }
+  .manager .result-type-pill { background: rgba(176, 122, 255, 0.15); color: var(--manager-color); }
+  .firefighter .result-type-pill { background: rgba(0, 229, 255, 0.15); color: var(--firefighter-color); }
+
+  .result-desc {
+    font-size: 1.1rem;
+    color: var(--muted-text);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .score-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  .exile .score-bar-fill { background: var(--gradient-cta); }
+  .manager .score-bar-fill { background: var(--gradient-purple); }
+  .firefighter .score-bar-fill { background: var(--gradient-blue); }
+
+  .score-pct {
+    font-size: 0.85rem;
+    font-weight: 800;
+    min-width: 40px;
+    text-align: right;
+  }
+
+  .exile .score-pct { color: var(--exile-color); }
+  .manager .score-pct { color: var(--manager-color); }
+  .firefighter .score-pct { color: var(--firefighter-color); }
+
+  .tips-heading {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-text);
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: 1.2rem;
+  }
+
+  .tips-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tips-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.05rem;
+    color: var(--muted-text);
+    line-height: 1.8;
+  }
+
+  .tips-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .exile .tips-list li::before { background: var(--exile-color); }
+  .manager .tips-list li::before { background: var(--manager-color); }
+  .firefighter .tips-list li::before { background: var(--firefighter-color); }
+
+  .results-footer {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .results-footer-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+    margin-bottom: 0.8rem;
+  }
+
+  .results-footer-body {
+    font-size: 0.95rem;
+    color: var(--muted-text);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-retake {
+    background: none;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--muted-text);
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.2s;
+    margin-right: 1rem;
+  }
+
+  .btn-retake:hover { border-color: rgba(255, 255, 255, 0.3); color: #fff; }
+
+  .btn-program {
+    background: var(--gradient-cta);
+    border: none;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(255, 45, 135, 0.25);
+  }
+
+  .btn-program:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(255, 45, 135, 0.4); }
+
+  @media (max-width: 768px) {
+    .quiz-nav { padding: 0.8rem 1.5rem; }
+    .quiz-body { padding: 3rem 1.5rem; }
+    .q-text { font-size: 1.4rem; }
+    .email-title { font-size: 2.2rem; }
+    .results-title { font-size: 2.4rem; }
+    .results-hero { padding: 4rem 1.5rem 2.5rem; }
+    .results-body { padding: 2rem 1.25rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── QUIZ ── -->
+<div id="quiz-page">
+  <nav class="quiz-nav">
+    <a href="index.html" class="quiz-nav-logo">Neurodivergent Strategies</a>
+    <div class="quiz-progress-wrap">
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+      <div class="quiz-progress-label" id="progress-label">Question 1 of 36</div>
+    </div>
+    <span class="nav-counter" id="nav-counter">1 / 36</span>
+  </nav>
+
+  <div class="quiz-body">
+    <div class="q-category" id="q-category"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options" id="options"></div>
+    <div class="quiz-nav-btns">
+      <button class="btn-back" id="btn-back" onclick="prevQ()" disabled>&larr; Back</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>Next &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── EMAIL GATE ── -->
+<div id="email-page">
+  <div class="email-body">
+    <div class="email-icon">&#127775;</div>
+    <h1 class="email-title">Your Results Are Ready!</h1>
+    <p class="email-subtitle">You just answered all 36 questions. Enter your email below to unlock your personalized Neuro Spicy Parts profile and get actionable strategies sent straight to your inbox.</p>
+    <form class="email-form" onsubmit="submitEmail(event)">
+      <input type="email" class="email-input" id="email-input" placeholder="your@email.com" required>
+      <div class="email-error" id="email-error">Please enter a valid email address.</div>
+      <button type="submit" class="email-submit" id="email-submit">Unlock My Results</button>
+      <span class="email-privacy">We respect your privacy. No spam, ever.</span>
+    </form>
+  </div>
+</div>
+
+<!-- ── RESULTS ── -->
+<div id="results-page">
+  <div class="results-hero">
+    <div class="results-eyebrow">Your Results &middot; Neuro Spicy Parts Quiz</div>
+    <h1 class="results-title">Your Top Neuro Spicy Parts</h1>
+    <p class="results-subtitle">These aren't flaws — they're protectors. Understanding them is the first step to moving forward with compassion instead of force.</p>
+  </div>
+  <div class="results-body">
+    <div id="results-list"></div>
+    <div class="results-footer">
+      <div class="results-footer-title">What Comes Next</div>
+      <div class="results-footer-body">In the coming weeks you'll learn to have a different relationship with these parts — not fight them, but understand what they're protecting, and gently move them out of the driver's seat so you can reach your goal.</div>
+      <button class="btn-retake" onclick="retake()">Retake Quiz</button>
+      <button class="btn-program" onclick="alert('Program enrollment coming soon!')">Join the Program</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const OPTS=[
+  {label:"Very likely",points:4},
+  {label:"Somewhat likely",points:3},
+  {label:"Neutral",points:2},
+  {label:"Not likely",points:1},
+  {label:"Not at all likely",points:0}
+];
+
+const PARTS=[
+  {id:"broken",name:"The Broken/Defective One",category:"exile",
+   desc:"Carries the core belief 'something is wrong with me.' When this part is active, even starting toward what you value feels pointless — because some part of you doesn't believe you're someone who gets to have those things.",
+   tips:["When the 'I'm not built for this' voice shows up, don't argue with it — just notice it. Say: 'I hear you. That's the Broken One talking.' Naming it creates distance from it.","Find one small piece of evidence that contradicts the belief. Not a big win — just one moment where you did something that someone who was truly broken couldn't have done.","Write a letter to this part. Not to fix it — just to acknowledge how long it's been carrying this. Compassion for it loosens its grip faster than fighting it."],
+   qs:["When I think about going after something I really want, a quiet voice reminds me of all the times I've tried and failed — and wonders if I'm just not built for this.","When I imagine actually reaching my goal, something in me deflates it before I can even get excited — like hoping feels dangerous.","I look at people who seem to manage life more easily than I do and wonder what they have that I seem to be missing at a fundamental level."]},
+  {id:"rejected",name:"The Rejected Child",category:"exile",
+   desc:"Holds fear of judgment and social failure. This part stalls action on anything that could be seen or evaluated by others — quietly blocking huge portions of what matters to you.",
+   tips:["Before any visible action — sending the email, sharing the work, asking for help — pause and check in with this part. Ask it: 'What are you afraid will happen?' Let it answer before you proceed.","Practice micro-visibility. Do one small visible thing toward your goal each week that carries low stakes. Build the evidence that being seen doesn't always end badly.","Separate the action from the outcome. Your job is to take the step, not to control how it lands. This part conflates the two — gently remind it they aren't the same thing."],
+   qs:["The moment reaching my goal requires other people to see me — my work, my progress, my effort — I find reasons to pull back or disappear.","I've let go of things that genuinely mattered to me because the risk of being seen trying and failing felt worse than not trying at all.","Following up, asking for help, or putting myself out there in any visible way costs me so much that I often quietly let the opportunity pass instead."]},
+  {id:"tryingsohard",name:"The Trying-So-Hard Part",category:"exile",
+   desc:"Carries grief from a lifetime of effort that never quite landed. This part makes it hard to try again — because trying means risking another round of working twice as hard for half the result.",
+   tips:["Acknowledge the grief before you try to move. This part doesn't need motivation — it needs to be witnessed. Say out loud or in writing: 'I know how hard I've already tried. That was real. It counted.'","This time, try differently — not harder. Identify one thing you've always done the hard way and ask: what would the easier path look like, even if it feels wrong?","Give yourself permission to try small. A tiny attempt that succeeds does more for this part than a massive effort that exhausts you. Small wins rebuild the trust that trying is worth it."],
+   qs:["I've given real goals everything I had before — and ended up in the same place. Part of me doesn't see the point in going through that again.","Just thinking about the effort this goal would take makes me feel tired in a deep way — like my body is already exhausted from every previous attempt.","Sometimes I wonder if I even deserve to want this anymore, given how many times I've tried and how little I have to show for it."]},
+  {id:"toomuch",name:"The 'Too Much' Part",category:"exile",
+   desc:"Carries shame around intensity and emotional volume. This part blocks action by making you pre-emptively shrink — holding back the very energy that would move you forward.",
+   tips:["Find at least one space — a journal, a trusted person, a private project — where you practice being fully yourself without editing. Your intensity is an asset that's been mislabeled.","When you catch yourself dialing back, ask: 'Am I shrinking for me, or for someone else's comfort?' The answer will tell you whether it's a genuine choice or this part running the show.","Notice that the very energy you've been told is too much is often exactly what your goal requires. The goal isn't to become less — it's to find where your volume belongs."],
+   qs:["When I feel genuine momentum toward something I care about, I dial it back — because wanting something this much, this visibly, feels like too much to put on people.","I've made myself smaller in rooms and relationships that mattered to me because being fully myself felt like it would cost me something.","The version of me that would actually reach my goal is bigger, louder, and more intense than I've ever felt safe being — and I'm not sure I'm allowed to be her/him/them."]},
+  {id:"perfectionist",name:"The Perfectionist/Paralysis Manager",category:"manager",
+   desc:"Blocks the first step by making it feel like a final exam. If the conditions aren't perfect, the start never comes — and the goal stays permanently out of reach.",
+   tips:["Name the first step so small it almost feels embarrassing. Not 'work on the project' — 'open the document.' The Perfectionist can't block something that tiny.","Set a deliberate 'good enough' standard before you start. Decide in advance: this draft only needs to be 70%. Write it down so the Perfectionist can't move the goalposts.","When you notice you're researching or planning instead of doing, set a timer for 10 minutes of actual work. You're not committing to finishing — just to starting."],
+   qs:["I have a clear picture of what I need to do — but I'm still waiting for the conditions, the plan, or the version of myself that feels ready enough to actually start.","I've put more time into planning, researching, and organizing around my goal than into the goal itself — and I know it, and I can't seem to stop.","I've walked away from things I genuinely cared about mid-process because once they stopped being good enough, finishing felt more painful than quitting."]},
+  {id:"overcommitter",name:"The Overcommitter",category:"manager",
+   desc:"Fills the schedule with everything except the things that actually matter. By saying yes to everyone else, it ensures there's never time or energy left for the goal.",
+   tips:["Before saying yes to anything this week, ask one question: does this bring me closer to or further from my goal? You don't have to say no yet — just notice the answer.","Schedule your goal first — before anything else gets the slot. The Overcommitter fills every gap. If the goal isn't blocked out in advance, it won't make it onto the list.","Practice a soft no: 'I'd love to but I'm protecting some time right now.' You don't owe anyone an explanation. This part convinces you that you do — that's the lie to watch for."],
+   qs:["I stay genuinely, exhaustingly busy — but at the end of the day the thing I actually want to build is the one thing that never made it onto the list.","I keep saying yes to everyone around me, and the goal that's actually mine keeps getting pushed to a future version of my life that never quite arrives.","Some part of me suspects that staying this busy is easier than sitting with the discomfort of actually trying — and possibly failing — at what I really want."]},
+  {id:"innercritic",name:"The Inner Critic",category:"manager",
+   desc:"Provides a running commentary on every attempt and every stumble — making the cost of trying feel higher than the cost of staying stuck.",
+   tips:["Give the Inner Critic a name and a visual. When it shows up, address it directly: 'I hear you. What are you trying to protect me from?' It almost always has an answer — and that answer is more useful than the criticism.","After any attempt — big or small — write down one thing that went okay before you allow the debrief. The Critic moves fast. You have to be faster.","Ask yourself: would I say this to someone I love who was trying their best? If the answer is no, the Critic has taken over. That question alone can create enough pause to shift the tone."],
+   qs:["Every time I take a real step toward my goal, something in me is already waiting to catalog what went wrong — and it's never gentle about it.","I've genuinely stopped trying things I cared about because the voice in my head after a stumble wasn't something I could keep putting myself through.","My inner commentary on my own progress is so relentlessly harsh that moving forward often feels like signing up for punishment."]},
+  {id:"performer",name:"The Performer/Masker",category:"manager",
+   desc:"Burns all available energy on appearing okay and capable — leaving nothing for the actual work of reaching the goal.",
+   tips:["Identify one area this week where you can drop the performance — even slightly. Let one person see that you're figuring something out. Unmasking in small doses builds the muscle.","At the end of each day, notice how much energy went to managing appearances vs. moving toward your goal. You don't need to change it yet — just see it clearly.","Ask yourself: who am I performing for right now, and what do I think will happen if I stop? The answer usually reveals the exile this part is protecting — and that's the real work."],
+   qs:["I spend so much energy appearing capable and okay to the outside world that by the time I'm alone, there's nothing left for the things I actually want.","The goals that are truly mine — the ones no one is watching — never get the energy they need because all of it goes to keeping up appearances everywhere else.","I've been performing a version of myself for so long that I've genuinely lost touch with what I'm even trying to move toward anymore."]},
+  {id:"procrastinator",name:"The Procrastinator",category:"firefighter",
+   desc:"Intercepts the moment of starting. Not laziness — a protective shutdown that kicks in right when a task matters most, keeping you stuck.",
+   tips:["When you feel the pull away from starting, don't fight it — get curious. Ask: 'What is this part afraid will happen if I start right now?' The answer is usually about failure or shame, not the task itself.","Use a 2-minute rule: commit to doing just 2 minutes of the thing. The Procrastinator's job is to prevent starting — it has no protocol for something this small. Often 2 minutes becomes 20.","Notice the pattern: the stronger the avoidance, the more the task matters. Use avoidance as a compass. High avoidance = high value. That reframe alone can shift your relationship with it."],
+   qs:["The things I avoid most consistently aren't the tasks I don't care about — they're the ones that matter to me the most.","I can feel myself approaching the moment of starting something important — and something in me reliably finds a way to make sure it doesn't happen.","I've watched real windows close on things I genuinely wanted — not because I didn't care, but because something in me couldn't let the start happen."]},
+  {id:"clown",name:"The Clown/Deflector",category:"firefighter",
+   desc:"Redirects attention whenever real progress requires vulnerability — quietly keeping things from moving forward.",
+   tips:["When you notice yourself deflecting with humor or lightness, pause and ask: what was I about to do or say before I made that joke? Go back to that moment — it's usually where the real thing lives.","Practice staying in a serious moment for 30 more seconds than feels comfortable. You don't have to go deep — just don't exit. This builds tolerance for the vulnerability that forward motion requires.","The Deflector isn't bad at reading a room — it's actually very skilled. Try redirecting that skill: use your humor to make vulnerability feel safer for others, not to avoid it yourself."],
+   qs:["When a moment arises that could actually move me closer to what I want, I watch myself make it smaller, funnier, or less serious — and then the moment is gone.","I've talked myself out of the kind of direct, vulnerable action that would actually move me forward by keeping things light and letting the opportunity dissolve.","Seriousness about my own wants feels genuinely uncomfortable — so I deflect, joke, or redirect, and then wonder why nothing changes."]},
+  {id:"shutdown",name:"The Shutdown/Exploder",category:"firefighter",
+   desc:"When the pressure of the gap gets too high, this part either shuts everything down or explodes outward — either way, nothing moves forward.",
+   tips:["Learn your early warning signs — the small signals that a shutdown or explosion is building before it arrives. A tight chest, a specific thought pattern, a sudden urge to cancel everything. Catching it early gives you options.","When you feel the pressure building, reduce the task to its absolute smallest form. Not 'do the work' — 'open the laptop.' Not 'have the conversation' — 'send one sentence.' Small keeps the system from flooding.","After a shutdown, resist the urge to immediately make up for lost time. That pressure is what caused the shutdown in the first place. Start with one small thing and let it be enough."],
+   qs:["There are stretches — sometimes days, sometimes weeks — where I simply cannot access myself enough to do the things I care about. I go flat, and the time disappears.","The pressure of falling behind on something that matters to me doesn't motivate me — it detonates me. I either go completely numb or completely off the rails, and either way I lose more ground.","My hardest shutdowns don't happen when life is calm — they happen at exactly the moment I most need to be moving forward."]},
+  {id:"escapist",name:"The Escapist",category:"firefighter",
+   desc:"Offers instant relief from the discomfort of being stuck — making staying where you are feel tolerable enough to never leave.",
+   tips:["Before you escape, pause for 60 seconds and name what you're escaping from. You don't have to stop — just see it clearly first. Awareness before the escape changes the relationship with it over time.","Notice the timing. If the escape shows up most reliably right before the important thing, that's not coincidence — that's the part doing its job. Use that pattern as a signal to get curious instead of reactive.","Find a smaller escape that still gives relief but costs less time. A 5-minute walk, a song, a snack — something that honors the part's need for relief without handing it the whole afternoon."],
+   qs:["When the gap between where I am and my goal feels unbearable, something in me goes looking for relief — and it always finds it, and the hours disappear.","My escapes aren't random habits. They show up with the most pull right when I'm supposed to be doing the thing that matters most — which tells me something.","Staying stuck has started to feel almost manageable — because the escape is always there, and it works just well enough to make not moving forward feel survivable."]}
+];
+
+const catLabels={exile:'Exile',manager:'Manager',firefighter:'Firefighter'};
+const catDisplay={exile:'Exile \u00b7 Wound-carrier',manager:'Manager \u00b7 Proactive protector',firefighter:'Firefighter \u00b7 Reactive protector'};
+
+const allQs=[];
+PARTS.forEach(p=>p.qs.forEach(q=>allQs.push({text:q,partId:p.id,category:p.category})));
+
+let current=0;
+const answers=new Array(36).fill(null);
+
+function renderQ(){
+  const q=allQs[current];
+  const pct=Math.round((current+1)/36*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-label').textContent='Question '+(current+1)+' of 36';
+  document.getElementById('nav-counter').textContent=(current+1)+' / 36';
+  const catEl=document.getElementById('q-category');
+  catEl.textContent=catDisplay[q.category];
+  catEl.className='q-category '+q.category;
+  document.getElementById('q-text').textContent=q.text;
+  const opts=document.getElementById('options');
+  opts.innerHTML='';
+  OPTS.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(answers[current]===i?' selected':'');
+    b.textContent=o.label;
+    b.onclick=()=>selectOpt(i);
+    opts.appendChild(b);
+  });
+  document.getElementById('btn-back').disabled=current===0;
+  document.getElementById('btn-next').disabled=answers[current]===null;
+  document.getElementById('btn-next').textContent=current===35?'See My Results \u2192':'Next \u2192';
+}
+
+function selectOpt(i){
+  answers[current]=i;
+  document.querySelectorAll('.opt').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
+  document.getElementById('btn-next').disabled=false;
+}
+
+function nextQ(){
+  if(current===35){showEmailGate();return;}
+  current++;renderQ();window.scrollTo(0,0);
+}
+
+function prevQ(){
+  if(current>0){current--;renderQ();window.scrollTo(0,0);}
+}
+
+function showEmailGate(){
+  document.getElementById('quiz-page').style.display='none';
+  document.getElementById('email-page').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function submitEmail(e){
+  e.preventDefault();
+  const email=document.getElementById('email-input').value.trim();
+  const errorEl=document.getElementById('email-error');
+  if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    errorEl.style.display='block';
+    return;
+  }
+  errorEl.style.display='none';
+
+  // Store email (in a real app, send to backend)
+  console.log('Email submitted:',email);
+  localStorage.setItem('quiz_email',email);
+
+  showResults();
+}
+
+function showResults(){
+  const scores={};
+  PARTS.forEach(p=>scores[p.id]=0);
+  allQs.forEach((q,i)=>{if(answers[i]!==null)scores[q.partId]+=OPTS[answers[i]].points;});
+  const maxScore=12;
+  const ranked=PARTS.map(p=>({...p,score:scores[p.id]})).sort((a,b)=>b.score-a.score).slice(0,3);
+
+  document.getElementById('email-page').style.display='none';
+  document.getElementById('results-page').style.display='block';
+  window.scrollTo(0,0);
+
+  const rankLabels=['Your strongest part','Second part','Third part'];
+  const list=document.getElementById('results-list');
+  list.innerHTML='';
+
+  ranked.forEach((p,i)=>{
+    const pct=Math.round(p.score/maxScore*100);
+    const tips='<ul class="tips-list">'+p.tips.map(t=>'<li>'+t+'</li>').join('')+'</ul>';
+    list.innerHTML+=
+    '<div class="result-card '+p.category+'">'+
+      '<div class="result-rank">'+rankLabels[i]+'</div>'+
+      '<div class="result-name">'+p.name+'</div>'+
+      '<span class="result-type-pill">'+catLabels[p.category]+'</span>'+
+      '<p class="result-desc">'+p.desc+'</p>'+
+      '<div class="score-row">'+
+        '<div class="score-bar-bg"><div class="score-bar-fill" style="width:'+pct+'%"></div></div>'+
+        '<span class="score-pct">'+pct+'%</span>'+
+      '</div>'+
+      '<div class="tips-heading">Quick tips for working with this part</div>'+
+      tips+
+    '</div>';
+  });
+}
+
+function retake(){
+  current=0;answers.fill(null);
+  document.getElementById('results-page').style.display='none';
+  document.getElementById('quiz-page').style.display='block';
+  window.scrollTo(0,0);
+  renderQ();
+}
+
+// Init
+renderQ();
+</script>
+</body>
+</html>

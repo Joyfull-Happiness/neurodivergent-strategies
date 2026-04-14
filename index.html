@@ -3,939 +3,598 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Neurodivergent Strategies — Neuro Spicy Parts Quiz</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Neurodivergent Strategies — Discover Your Neuro Spicy Parts</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #faf7f2;
-    --cream-dark: #f0ebe0;
-    --mauve: #c9a8b8;
-    --mauve-light: #ecdce5;
-    --mauve-dark: #8e6070;
-    --purple: #7c6a9e;
-    --purple-light: #ede8f5;
-    --purple-dark: #4e4070;
-    --rose: #d4929a;
-    --rose-light: #f5e4e6;
-    --text: #2e2830;
-    --text-muted: #7a6e72;
-    --text-light: #b0a4a8;
-    --exile: #c97a6e;
-    --exile-bg: #faf0ee;
-    --manager: #7c6a9e;
-    --manager-bg: #ede8f5;
-    --firefighter: #6a9e8a;
-    --firefighter-bg: #e8f5f0;
+    --electric-blue: #2d5fff;
+    --vivid-purple: #7b2ff7;
+    --hot-pink: #ff2d87;
+    --golden: #ffb800;
+    --cyan: #00e5ff;
+    --dark-bg: #0f0e2a;
+    --card-bg: #1a1940;
+    --light-text: #f0eeff;
+    --muted-text: #b8b5d0;
+    --gradient-hero: linear-gradient(135deg, #0f0e2a 0%, #1e1350 40%, #2a1065 70%, #3d0d80 100%);
+    --gradient-cta: linear-gradient(135deg, #ff2d87, #ff6b3d, #ffb800);
+    --gradient-blue: linear-gradient(135deg, #2d5fff, #00e5ff);
+    --gradient-purple: linear-gradient(135deg, #7b2ff7, #ff2d87);
+    --exile-color: #ff6b3d;
+    --manager-color: #7b2ff7;
+    --firefighter-color: #00e5ff;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--cream);
-    color: var(--text);
-    min-height: 100vh;
+    font-family: 'Nunito', sans-serif;
+    background: var(--dark-bg);
+    color: var(--light-text);
     overflow-x: hidden;
   }
 
-  /* ── LANDING PAGE ── */
-  #landing {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
+  /* ── NAV ── */
   .nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.5rem 3rem;
-    border-bottom: 1px solid var(--mauve-light);
+    padding: 1.2rem 3rem;
+    background: rgba(15, 14, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(123, 47, 247, 0.2);
   }
 
   .nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--purple-dark);
-    letter-spacing: 0.02em;
+    font-family: 'Bangers', cursive;
+    font-size: 1.6rem;
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.04em;
   }
 
-  .nav-tag {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .hero {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 5rem 3rem 4rem;
-    align-items: center;
-  }
-
-  .hero-left { padding-right: 4rem; }
-
-  .hero-eyebrow {
+  .nav-cta {
     display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
+    background: var(--gradient-cta);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    padding: 0.7rem 1.8rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
     text-transform: uppercase;
-    color: var(--mauve-dark);
-    background: var(--mauve-light);
-    padding: 0.35rem 0.9rem;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
+    letter-spacing: 0.06em;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 45, 135, 0.4);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--gradient-hero);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 45, 135, 0.15), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 229, 255, 0.1), transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 850px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--golden);
+    background: rgba(255, 184, 0, 0.12);
+    border: 1px solid rgba(255, 184, 0, 0.3);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 2rem;
   }
 
   .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.4rem;
-    line-height: 1.18;
-    color: var(--purple-dark);
+    font-family: 'Bangers', cursive;
+    font-size: 5rem;
+    line-height: 1.1;
+    letter-spacing: 0.03em;
     margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #fff 30%, var(--cyan) 60%, var(--hot-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
     font-weight: 400;
-  }
-
-  .hero-title em {
-    font-style: italic;
-    color: var(--mauve-dark);
-  }
-
-  .hero-body {
-    font-size: 1rem;
-    color: var(--text-muted);
+    color: var(--muted-text);
     line-height: 1.8;
-    margin-bottom: 2.5rem;
-    font-weight: 300;
+    max-width: 650px;
+    margin: 0 auto 3rem;
   }
 
   .hero-cta {
     display: inline-block;
-    background: var(--purple);
+    background: var(--gradient-cta);
     color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    padding: 0.9rem 2.2rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 900;
+    padding: 1.1rem 3rem;
     border-radius: 50px;
     border: none;
     cursor: pointer;
-    letter-spacing: 0.02em;
-    transition: background 0.2s, transform 0.15s;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(255, 45, 135, 0.35);
   }
 
-  .hero-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
+  .hero-cta:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 35px rgba(255, 45, 135, 0.5);
+  }
 
   .hero-note {
     display: block;
-    margin-top: 0.9rem;
-    font-size: 0.78rem;
-    color: var(--text-light);
+    margin-top: 1.2rem;
+    font-size: 0.85rem;
+    color: rgba(184, 181, 208, 0.6);
   }
 
-  .hero-right {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .float-card {
-    background: #fff;
-    border: 1px solid var(--mauve-light);
-    border-radius: 16px;
-    padding: 1.2rem 1.4rem;
+  /* ── WHAT IS THIS SECTION ── */
+  .about-section {
+    padding: 7rem 2rem;
+    background: linear-gradient(180deg, var(--dark-bg), #130f35);
     position: relative;
   }
 
-  .float-card-label {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
-
-  .float-card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--text);
-    margin-bottom: 0.3rem;
-  }
-
-  .float-card-body {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  .float-card.exile .float-card-label { color: var(--exile); }
-  .float-card.manager .float-card-label { color: var(--manager); }
-  .float-card.firefighter .float-card-label { color: var(--firefighter); }
-
-  .pill-row {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 0.6rem;
-  }
-
-  .pill {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.7rem;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-
-  .pill.exile { background: var(--exile-bg); color: var(--exile); }
-  .pill.manager { background: var(--manager-bg); color: var(--manager); }
-  .pill.firefighter { background: var(--firefighter-bg); color: var(--firefighter); }
-
-  .how-section {
-    background: var(--cream-dark);
-    padding: 4rem 3rem;
-    border-top: 1px solid var(--mauve-light);
-  }
-
-  .how-inner {
-    max-width: 800px;
+  .about-inner {
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
   }
 
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+
   .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--purple-dark);
-    margin-bottom: 0.75rem;
-    font-weight: 400;
+    font-family: 'Bangers', cursive;
+    font-size: 3rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.5rem;
+    color: #fff;
   }
 
   .section-body {
+    font-size: 1.1rem;
+    color: var(--muted-text);
+    line-height: 1.9;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* ── PARTS CATEGORIES ── */
+  .parts-section {
+    padding: 5rem 2rem 7rem;
+    background: #130f35;
+  }
+
+  .parts-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .part-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+
+  .part-card:hover {
+    transform: translateY(-6px);
+  }
+
+  .part-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+  }
+
+  .part-card.exile::before { background: var(--gradient-cta); }
+  .part-card.exile:hover { box-shadow: 0 12px 40px rgba(255, 107, 61, 0.15); }
+
+  .part-card.manager::before { background: var(--gradient-purple); }
+  .part-card.manager:hover { box-shadow: 0 12px 40px rgba(123, 47, 247, 0.15); }
+
+  .part-card.firefighter::before { background: var(--gradient-blue); }
+  .part-card.firefighter:hover { box-shadow: 0 12px 40px rgba(0, 229, 255, 0.15); }
+
+  .part-card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .part-card-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .part-card.exile .part-card-label { color: var(--exile-color); }
+  .part-card.manager .part-card-label { color: var(--manager-color); }
+  .part-card.firefighter .part-card-label { color: var(--firefighter-color); }
+
+  .part-card-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.6rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.8rem;
+    color: #fff;
+  }
+
+  .part-card-body {
     font-size: 0.95rem;
-    color: var(--text-muted);
+    color: var(--muted-text);
     line-height: 1.8;
-    font-weight: 300;
-    margin-bottom: 3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .part-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .part-pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  .part-card.exile .part-pill { background: rgba(255, 107, 61, 0.12); color: var(--exile-color); }
+  .part-card.manager .part-pill { background: rgba(123, 47, 247, 0.12); color: var(--manager-color); }
+  .part-card.firefighter .part-pill { background: rgba(0, 229, 255, 0.12); color: var(--firefighter-color); }
+
+  /* ── HOW IT WORKS ── */
+  .how-section {
+    padding: 7rem 2rem;
+    background: linear-gradient(180deg, #130f35, var(--dark-bg));
+  }
+
+  .how-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
   }
 
   .steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
+    gap: 2rem;
+    margin-top: 3rem;
     text-align: left;
   }
 
   .step {
-    background: #fff;
-    border: 1px solid var(--mauve-light);
-    border-radius: 14px;
-    padding: 1.5rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
   }
 
   .step-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    color: var(--mauve-light);
+    font-family: 'Bangers', cursive;
+    font-size: 3rem;
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     line-height: 1;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .step-title {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 0.4rem;
-  }
-
-  .step-body {
-    font-size: 0.82rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  /* ── QUIZ PAGE ── */
-  #quiz-page {
-    display: none;
-    min-height: 100vh;
-    background: var(--cream);
-  }
-
-  .quiz-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 3rem;
-    border-bottom: 1px solid var(--mauve-light);
-    background: #fff;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-
-  .quiz-nav-logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    color: var(--purple-dark);
-  }
-
-  .quiz-progress-wrap {
-    flex: 1;
-    max-width: 300px;
-    margin: 0 2rem;
-  }
-
-  .quiz-progress-bar {
-    height: 3px;
-    background: var(--mauve-light);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .quiz-progress-fill {
-    height: 100%;
-    background: var(--purple);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-  }
-
-  .quiz-progress-label {
-    font-size: 0.72rem;
-    color: var(--text-light);
-    margin-top: 0.35rem;
-    text-align: center;
-  }
-
-  .quiz-body {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 4rem 2rem;
-  }
-
-  .q-category {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #fff;
     margin-bottom: 0.6rem;
   }
 
-  .q-category.exile { color: var(--exile); }
-  .q-category.manager { color: var(--manager); }
-  .q-category.firefighter { color: var(--firefighter); }
-
-  .q-text {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    line-height: 1.5;
-    color: var(--text);
-    margin-bottom: 2.5rem;
-    font-weight: 400;
-  }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.7rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .opt {
-    background: #fff;
-    border: 1.5px solid var(--mauve-light);
-    border-radius: 12px;
-    padding: 1rem 1.4rem;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-  }
-
-  .opt:hover {
-    border-color: var(--purple);
-    color: var(--text);
-    background: var(--purple-light);
-  }
-
-  .opt.selected {
-    border-color: var(--purple);
-    background: var(--purple-light);
-    color: var(--purple-dark);
-    font-weight: 500;
-  }
-
-  .quiz-nav-btns {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .btn-back {
-    background: none;
-    border: 1.5px solid var(--mauve-light);
-    border-radius: 50px;
-    padding: 0.7rem 1.6rem;
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-  }
-
-  .btn-back:hover { border-color: var(--mauve); color: var(--text); }
-  .btn-back:disabled { opacity: 0.3; cursor: default; }
-
-  .btn-next {
-    background: var(--purple);
-    border: none;
-    border-radius: 50px;
-    padding: 0.7rem 2rem;
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-  }
-
-  .btn-next:hover { background: var(--purple-dark); transform: translateY(-1px); }
-  .btn-next:disabled { opacity: 0.35; cursor: default; transform: none; }
-
-  /* ── RESULTS PAGE ── */
-  #results-page {
-    display: none;
-    min-height: 100vh;
-    background: var(--cream);
-  }
-
-  .results-hero {
-    background: var(--purple-dark);
-    color: #fff;
-    padding: 4rem 3rem 3rem;
-    text-align: center;
-  }
-
-  .results-eyebrow {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mauve-light);
-    margin-bottom: 1rem;
-    opacity: 0.8;
-  }
-
-  .results-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.6rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .results-subtitle {
-    font-size: 0.95rem;
-    font-weight: 300;
-    opacity: 0.75;
-    max-width: 520px;
-    margin: 0 auto;
+  .step-body {
+    font-size: 0.9rem;
+    color: var(--muted-text);
     line-height: 1.8;
   }
 
-  .results-body {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 3rem 2rem 5rem;
-  }
-
-  .result-card {
-    background: #fff;
-    border: 1px solid var(--mauve-light);
-    border-radius: 20px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
+  /* ── BIG CTA SECTION ── */
+  .cta-section {
+    padding: 8rem 2rem;
+    text-align: center;
+    background: var(--dark-bg);
     position: relative;
     overflow: hidden;
   }
 
-  .result-card::before {
+  .cta-section::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 5px;
-    height: 100%;
-    border-radius: 20px 0 0 20px;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(123, 47, 247, 0.12), transparent 70%);
   }
 
-  .result-card.exile::before { background: var(--exile); }
-  .result-card.manager::before { background: var(--manager); }
-  .result-card.firefighter::before { background: var(--firefighter); }
-
-  .result-rank {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
+  .cta-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  .result-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 0.4rem;
-  }
-
-  .result-type-pill {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 500;
-    padding: 0.25rem 0.8rem;
-    border-radius: 20px;
+  .cta-title {
+    font-family: 'Bangers', cursive;
+    font-size: 3.5rem;
+    letter-spacing: 0.03em;
     margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--golden), var(--hot-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .exile .result-type-pill { background: var(--exile-bg); color: var(--exile); }
-  .manager .result-type-pill { background: var(--manager-bg); color: var(--manager); }
-  .firefighter .result-type-pill { background: var(--firefighter-bg); color: var(--firefighter); }
-
-  .result-desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
+  .cta-body {
+    font-size: 1.1rem;
+    color: var(--muted-text);
     line-height: 1.8;
-    font-weight: 300;
-    margin-bottom: 1.25rem;
+    margin-bottom: 2.5rem;
   }
 
-  .score-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .score-bar-bg {
-    flex: 1;
-    height: 5px;
-    background: var(--cream-dark);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .score-bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 1s ease;
-  }
-
-  .exile .score-bar-fill { background: var(--exile); }
-  .manager .score-bar-fill { background: var(--manager); }
-  .firefighter .score-bar-fill { background: var(--firefighter); }
-
-  .score-pct {
-    font-size: 0.8rem;
-    font-weight: 500;
-    min-width: 36px;
-    text-align: right;
-  }
-
-  .exile .score-pct { color: var(--exile); }
-  .manager .score-pct { color: var(--manager); }
-  .firefighter .score-pct { color: var(--firefighter); }
-
-  .tips-heading {
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-light);
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--cream-dark);
-    margin-bottom: 0.9rem;
-  }
-
-  .tip-item {
-    display: flex;
-    gap: 0.9rem;
-    align-items: flex-start;
-    margin-bottom: 0.9rem;
-  }
-
-  .tip-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    margin-top: 6px;
-    flex-shrink: 0;
-  }
-
-  .exile .tip-dot { background: var(--exile); }
-  .manager .tip-dot { background: var(--manager); }
-  .firefighter .tip-dot { background: var(--firefighter); }
-
-  .tip-text {
-    font-size: 0.88rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .results-footer {
-    background: var(--mauve-light);
-    border-radius: 16px;
-    padding: 2rem;
-    text-align: center;
-    margin-top: 2rem;
-  }
-
-  .results-footer-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    color: var(--purple-dark);
-    margin-bottom: 0.5rem;
-    font-weight: 400;
-  }
-
-  .results-footer-body {
-    font-size: 0.88rem;
-    color: var(--mauve-dark);
-    line-height: 1.8;
-    font-weight: 300;
-    margin-bottom: 1.25rem;
-  }
-
-  .btn-retake {
-    background: none;
-    border: 1.5px solid var(--mauve-dark);
-    border-radius: 50px;
-    padding: 0.65rem 1.8rem;
-    font-size: 0.85rem;
-    color: var(--mauve-dark);
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
-    margin-right: 0.75rem;
-  }
-
-  .btn-retake:hover { background: var(--mauve-dark); color: #fff; }
-
-  .btn-start-program {
-    background: var(--purple-dark);
-    border: none;
-    border-radius: 50px;
-    padding: 0.65rem 1.8rem;
-    font-size: 0.85rem;
-    font-weight: 500;
+  .cta-btn {
+    display: inline-block;
+    background: var(--gradient-cta);
     color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    padding: 1.2rem 3.5rem;
+    border-radius: 50px;
+    border: none;
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.15s;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 25px rgba(255, 45, 135, 0.35);
   }
 
-  .btn-start-program:hover { background: var(--purple); }
+  .cta-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 40px rgba(255, 45, 135, 0.5);
+  }
 
+  .cta-note {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    color: rgba(184, 181, 208, 0.5);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--dark-bg);
+  }
+
+  .footer-logo {
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: rgba(184, 181, 208, 0.4);
+  }
+
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-    .hero-left { padding-right: 0; margin-bottom: 2rem; }
-    .hero-title { font-size: 2.4rem; }
-    .steps { grid-template-columns: 1fr; }
-    .nav, .quiz-nav { padding: 1.25rem 1.5rem; }
-    .quiz-body, .results-body { padding: 2rem 1.25rem; }
-    .results-hero { padding: 3rem 1.5rem 2rem; }
-    .results-title { font-size: 2rem; }
+    .nav { padding: 1rem 1.5rem; }
+    .nav-logo { font-size: 1.3rem; }
+    .hero { padding: 7rem 1.5rem 4rem; }
+    .hero-title { font-size: 3rem; }
+    .hero-subtitle { font-size: 1.05rem; }
+    .parts-grid { grid-template-columns: 1fr; max-width: 500px; }
+    .steps { grid-template-columns: 1fr; max-width: 500px; margin: 3rem auto 0; }
+    .section-title { font-size: 2.2rem; }
+    .cta-title { font-size: 2.5rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════ LANDING ══════════════════ -->
-<div id="landing">
-  <nav class="nav">
-    <span class="nav-logo">Neurodivergent Strategies</span>
-    <span class="nav-tag">Parts Work Coaching</span>
-  </nav>
+<!-- ── NAV ── -->
+<nav class="nav">
+  <span class="nav-logo">Neurodivergent Strategies</span>
+  <a href="quiz.html" class="nav-cta">Take the Quiz</a>
+</nav>
 
-  <section class="hero">
-    <div class="hero-left">
-      <span class="hero-eyebrow">Week 2 · Neuro Spicy Parts Quiz</span>
-      <h1 class="hero-title">Meet the parts <em>keeping you</em> from your goals</h1>
-      <p class="hero-body">You're not lazy. You're not broken. You have parts — and some of them are working overtime to protect you in ways that are quietly blocking everything you actually want to do. This quiz helps you identify which ones are running the show.</p>
-      <button class="hero-cta" onclick="startQuiz()">Take the quiz — 36 questions</button>
-      <span class="hero-note">Takes about 8–10 minutes · No sign-up required</span>
-    </div>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-badge">Neuro Spicy Parts Quiz</span>
+    <h1 class="hero-title">Discover the Hidden Parts Running Your Life</h1>
+    <p class="hero-subtitle">You're not lazy. You're not broken. You have parts — protectors working overtime inside your neurodivergent brain. This quiz reveals exactly which ones are standing between you and your goals.</p>
+    <a href="quiz.html" class="hero-cta">Take the Quiz</a>
+    <span class="hero-note">36 questions &middot; About 8-10 minutes</span>
+  </div>
+</section>
 
-    <div class="hero-right">
-      <div class="float-card exile">
-        <div class="float-card-label">Exiles</div>
-        <div class="float-card-title">The wound-carriers</div>
-        <div class="float-card-body">Parts that hold the pain, shame, and old beliefs formed from years of corrective feedback in a world not built for your brain.</div>
-        <div class="pill-row">
-          <span class="pill exile">The Broken One</span>
-          <span class="pill exile">The Rejected Child</span>
-          <span class="pill exile">Trying-So-Hard</span>
-          <span class="pill exile">Too Much</span>
-        </div>
-      </div>
-      <div class="float-card manager">
-        <div class="float-card-label">Managers</div>
-        <div class="float-card-title">The proactive protectors</div>
-        <div class="float-card-body">Parts that work ahead of time to prevent shame from surfacing — often by keeping you busy, perfect, or performing.</div>
-        <div class="pill-row">
-          <span class="pill manager">Perfectionist</span>
-          <span class="pill manager">Overcommitter</span>
-          <span class="pill manager">Inner Critic</span>
-          <span class="pill manager">Performer</span>
-        </div>
-      </div>
-      <div class="float-card firefighter">
-        <div class="float-card-label">Firefighters</div>
-        <div class="float-card-title">The reactive protectors</div>
-        <div class="float-card-body">Parts that jump in after the shame is already triggered — using distraction, escape, deflection, or shutdown to make the pain stop fast.</div>
-        <div class="pill-row">
-          <span class="pill firefighter">Procrastinator</span>
-          <span class="pill firefighter">Clown/Deflector</span>
-          <span class="pill firefighter">Shutdown</span>
-          <span class="pill firefighter">Escapist</span>
-        </div>
+<!-- ── ABOUT ── -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="section-label">What is this?</div>
+    <h2 class="section-title">Not a Personality Test. A Parts Map.</h2>
+    <p class="section-body">Built specifically for neurodivergent brains, the Neuro Spicy Parts Quiz maps the internal protectors that quietly block everything you actually want to do. Based on Internal Family Systems (IFS) parts work, it identifies 12 distinct parts across three categories — and shows you the ones that are most active in your system right now.</p>
+  </div>
+</section>
+
+<!-- ── THE THREE CATEGORIES ── -->
+<section class="parts-section">
+  <div class="parts-grid">
+    <div class="part-card exile">
+      <div class="part-card-icon">&#128293;</div>
+      <div class="part-card-label">Exiles</div>
+      <div class="part-card-title">The Wound-Carriers</div>
+      <p class="part-card-body">Parts that hold the pain, shame, and old beliefs formed from years of corrective feedback in a world not built for your brain.</p>
+      <div class="part-pills">
+        <span class="part-pill">The Broken One</span>
+        <span class="part-pill">The Rejected Child</span>
+        <span class="part-pill">Trying-So-Hard</span>
+        <span class="part-pill">Too Much</span>
       </div>
     </div>
-  </section>
 
-  <section class="how-section">
-    <div class="how-inner">
-      <h2 class="section-title">How it works</h2>
-      <p class="section-body">This isn't a personality test. It's a parts map — designed specifically for neurodivergent brains — that shows you exactly which internal parts are standing between where you are and where you want to be.</p>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <div class="step-title">Answer 36 questions</div>
-          <div class="step-body">Each question is written around a specific moment where something you value is within reach — and something blocks it. Rate how likely each one sounds like you.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <div class="step-title">Get your top 3 parts</div>
-          <div class="step-body">Your answers are scored across 12 Neuro Spicy Parts. Your top 3 — the ones most active in your system right now — are revealed with a full description.</div>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <div class="step-title">Get actionable tips</div>
-          <div class="step-body">Each result comes with 3 ADHD-friendly strategies for working with that part — not fighting it — so you can start moving toward your goals this week.</div>
-        </div>
+    <div class="part-card manager">
+      <div class="part-card-icon">&#128737;</div>
+      <div class="part-card-label">Managers</div>
+      <div class="part-card-title">The Proactive Protectors</div>
+      <p class="part-card-body">Parts that work ahead of time to prevent shame from surfacing — often by keeping you busy, perfect, or performing.</p>
+      <div class="part-pills">
+        <span class="part-pill">Perfectionist</span>
+        <span class="part-pill">Overcommitter</span>
+        <span class="part-pill">Inner Critic</span>
+        <span class="part-pill">Performer</span>
       </div>
     </div>
-  </section>
-</div>
 
-<!-- ══════════════════ QUIZ ══════════════════ -->
-<div id="quiz-page">
-  <nav class="quiz-nav">
-    <span class="quiz-nav-logo">Neurodivergent Strategies</span>
-    <div class="quiz-progress-wrap">
-      <div class="quiz-progress-bar">
-        <div class="quiz-progress-fill" id="progress-fill" style="width:0%"></div>
+    <div class="part-card firefighter">
+      <div class="part-card-icon">&#9889;</div>
+      <div class="part-card-label">Firefighters</div>
+      <div class="part-card-title">The Reactive Protectors</div>
+      <p class="part-card-body">Parts that jump in after the shame is already triggered — using distraction, escape, or shutdown to make the pain stop fast.</p>
+      <div class="part-pills">
+        <span class="part-pill">Procrastinator</span>
+        <span class="part-pill">Clown/Deflector</span>
+        <span class="part-pill">Shutdown</span>
+        <span class="part-pill">Escapist</span>
       </div>
-      <div class="quiz-progress-label" id="progress-label">Question 1 of 36</div>
-    </div>
-    <span style="font-size:0.78rem;color:var(--text-light)" id="nav-counter">1 / 36</span>
-  </nav>
-
-  <div class="quiz-body">
-    <div class="q-category" id="q-category"></div>
-    <div class="q-text" id="q-text"></div>
-    <div class="options" id="options"></div>
-    <div class="quiz-nav-btns">
-      <button class="btn-back" id="btn-back" onclick="prevQ()" disabled>← Back</button>
-      <button class="btn-next" id="btn-next" onclick="nextQ()" disabled>Next →</button>
     </div>
   </div>
-</div>
+</section>
 
-<!-- ══════════════════ RESULTS ══════════════════ -->
-<div id="results-page">
-  <div class="results-hero">
-    <div class="results-eyebrow">Your results · Neuro Spicy Parts Quiz</div>
-    <h1 class="results-title">Your top Neuro Spicy Parts</h1>
-    <p class="results-subtitle">These aren't flaws — they're protectors. Understanding them is the first step to moving forward with compassion instead of force.</p>
-  </div>
-  <div class="results-body">
-    <div id="results-list"></div>
-    <div class="results-footer">
-      <div class="results-footer-title">What comes next</div>
-      <div class="results-footer-body">In the coming weeks you'll learn to have a different relationship with these parts — not fight them, but understand what they're protecting, and gently move them out of the driver's seat so you can reach your goal.</div>
-      <button class="btn-retake" onclick="retake()">Retake quiz</button>
-      <button class="btn-start-program" onclick="alert('Program enrollment coming soon!')">Join the program</button>
+<!-- ── HOW IT WORKS ── -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-label">How It Works</div>
+    <h2 class="section-title">Three Steps to Understanding Your Parts</h2>
+    <p class="section-body">No sign-up to start. Just honest answers and real clarity about what's going on inside.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Answer 36 Questions</div>
+        <p class="step-body">Each question is designed around a specific moment where something you value is within reach — and something blocks it. Rate how likely each one sounds like you.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Enter Your Email</div>
+        <p class="step-body">Your answers are scored across all 12 Neuro Spicy Parts. Enter your email to unlock your personalized results and get follow-up strategies.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Get Your Top 3 Parts</div>
+        <p class="step-body">Your top 3 — the ones most active in your system right now — are revealed with full descriptions and ADHD-friendly strategies for working with them.</p>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<script>
-const OPTS=[
-  {label:"Very likely",points:4},
-  {label:"Somewhat likely",points:3},
-  {label:"Neutral",points:2},
-  {label:"Not likely",points:1},
-  {label:"Not at all likely",points:0}
-];
+<!-- ── BIG CTA ── -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-title">Ready to Meet Your Parts?</h2>
+    <p class="cta-body">Stop fighting yourself. Start understanding yourself. Take the quiz and discover which internal protectors are quietly running the show.</p>
+    <a href="quiz.html" class="cta-btn">Take the Quiz Now</a>
+    <span class="cta-note">36 questions &middot; About 8-10 minutes</span>
+  </div>
+</section>
 
-const PARTS=[
-  {id:"broken",name:"The Broken/Defective One",category:"exile",
-   desc:"Carries the core belief 'something is wrong with me.' When this part is active, even starting toward what you value feels pointless — because some part of you doesn't believe you're someone who gets to have those things.",
-   tips:["When the 'I'm not built for this' voice shows up, don't argue with it — just notice it. Say: 'I hear you. That's the Broken One talking.' Naming it creates distance from it.","Find one small piece of evidence that contradicts the belief. Not a big win — just one moment where you did something that someone who was truly broken couldn't have done.","Write a letter to this part. Not to fix it — just to acknowledge how long it's been carrying this. Compassion for it loosens its grip faster than fighting it."],
-   qs:["When I think about going after something I really want, a quiet voice reminds me of all the times I've tried and failed — and wonders if I'm just not built for this.","When I imagine actually reaching my goal, something in me deflates it before I can even get excited — like hoping feels dangerous.","I look at people who seem to manage life more easily than I do and wonder what they have that I seem to be missing at a fundamental level."]},
-  {id:"rejected",name:"The Rejected Child",category:"exile",
-   desc:"Holds fear of judgment and social failure. This part stalls action on anything that could be seen or evaluated by others — quietly blocking huge portions of what matters to you.",
-   tips:["Before any visible action — sending the email, sharing the work, asking for help — pause and check in with this part. Ask it: 'What are you afraid will happen?' Let it answer before you proceed.","Practice micro-visibility. Do one small visible thing toward your goal each week that carries low stakes. Build the evidence that being seen doesn't always end badly.","Separate the action from the outcome. Your job is to take the step, not to control how it lands. This part conflates the two — gently remind it they aren't the same thing."],
-   qs:["The moment reaching my goal requires other people to see me — my work, my progress, my effort — I find reasons to pull back or disappear.","I've let go of things that genuinely mattered to me because the risk of being seen trying and failing felt worse than not trying at all.","Following up, asking for help, or putting myself out there in any visible way costs me so much that I often quietly let the opportunity pass instead."]},
-  {id:"tryingsohard",name:"The Trying-So-Hard Part",category:"exile",
-   desc:"Carries grief from a lifetime of effort that never quite landed. This part makes it hard to try again — because trying means risking another round of working twice as hard for half the result.",
-   tips:["Acknowledge the grief before you try to move. This part doesn't need motivation — it needs to be witnessed. Say out loud or in writing: 'I know how hard I've already tried. That was real. It counted.'","This time, try differently — not harder. Identify one thing you've always done the hard way and ask: what would the easier path look like, even if it feels wrong?","Give yourself permission to try small. A tiny attempt that succeeds does more for this part than a massive effort that exhausts you. Small wins rebuild the trust that trying is worth it."],
-   qs:["I've given real goals everything I had before — and ended up in the same place. Part of me doesn't see the point in going through that again.","Just thinking about the effort this goal would take makes me feel tired in a deep way — like my body is already exhausted from every previous attempt.","Sometimes I wonder if I even deserve to want this anymore, given how many times I've tried and how little I have to show for it."]},
-  {id:"toomuch",name:"The 'Too Much' Part",category:"exile",
-   desc:"Carries shame around intensity and emotional volume. This part blocks action by making you pre-emptively shrink — holding back the very energy that would move you forward.",
-   tips:["Find at least one space — a journal, a trusted person, a private project — where you practice being fully yourself without editing. Your intensity is an asset that's been mislabeled.","When you catch yourself dialing back, ask: 'Am I shrinking for me, or for someone else's comfort?' The answer will tell you whether it's a genuine choice or this part running the show.","Notice that the very energy you've been told is too much is often exactly what your goal requires. The goal isn't to become less — it's to find where your volume belongs."],
-   qs:["When I feel genuine momentum toward something I care about, I dial it back — because wanting something this much, this visibly, feels like too much to put on people.","I've made myself smaller in rooms and relationships that mattered to me because being fully myself felt like it would cost me something.","The version of me that would actually reach my goal is bigger, louder, and more intense than I've ever felt safe being — and I'm not sure I'm allowed to be her/him/them."]},
-  {id:"perfectionist",name:"The Perfectionist/Paralysis Manager",category:"manager",
-   desc:"Blocks the first step by making it feel like a final exam. If the conditions aren't perfect, the start never comes — and the goal stays permanently out of reach.",
-   tips:["Name the first step so small it almost feels embarrassing. Not 'work on the project' — 'open the document.' The Perfectionist can't block something that tiny.","Set a deliberate 'good enough' standard before you start. Decide in advance: this draft only needs to be 70%. Write it down so the Perfectionist can't move the goalposts.","When you notice you're researching or planning instead of doing, set a timer for 10 minutes of actual work. You're not committing to finishing — just to starting."],
-   qs:["I have a clear picture of what I need to do — but I'm still waiting for the conditions, the plan, or the version of myself that feels ready enough to actually start.","I've put more time into planning, researching, and organizing around my goal than into the goal itself — and I know it, and I can't seem to stop.","I've walked away from things I genuinely cared about mid-process because once they stopped being good enough, finishing felt more painful than quitting."]},
-  {id:"overcommitter",name:"The Overcommitter",category:"manager",
-   desc:"Fills the schedule with everything except the things that actually matter. By saying yes to everyone else, it ensures there's never time or energy left for the goal.",
-   tips:["Before saying yes to anything this week, ask one question: does this bring me closer to or further from my goal? You don't have to say no yet — just notice the answer.","Schedule your goal first — before anything else gets the slot. The Overcommitter fills every gap. If the goal isn't blocked out in advance, it won't make it onto the list.","Practice a soft no: 'I'd love to but I'm protecting some time right now.' You don't owe anyone an explanation. This part convinces you that you do — that's the lie to watch for."],
-   qs:["I stay genuinely, exhaustingly busy — but at the end of the day the thing I actually want to build is the one thing that never made it onto the list.","I keep saying yes to everyone around me, and the goal that's actually mine keeps getting pushed to a future version of my life that never quite arrives.","Some part of me suspects that staying this busy is easier than sitting with the discomfort of actually trying — and possibly failing — at what I really want."]},
-  {id:"innercritic",name:"The Inner Critic",category:"manager",
-   desc:"Provides a running commentary on every attempt and every stumble — making the cost of trying feel higher than the cost of staying stuck.",
-   tips:["Give the Inner Critic a name and a visual. When it shows up, address it directly: 'I hear you. What are you trying to protect me from?' It almost always has an answer — and that answer is more useful than the criticism.","After any attempt — big or small — write down one thing that went okay before you allow the debrief. The Critic moves fast. You have to be faster.","Ask yourself: would I say this to someone I love who was trying their best? If the answer is no, the Critic has taken over. That question alone can create enough pause to shift the tone."],
-   qs:["Every time I take a real step toward my goal, something in me is already waiting to catalog what went wrong — and it's never gentle about it.","I've genuinely stopped trying things I cared about because the voice in my head after a stumble wasn't something I could keep putting myself through.","My inner commentary on my own progress is so relentlessly harsh that moving forward often feels like signing up for punishment."]},
-  {id:"performer",name:"The Performer/Masker",category:"manager",
-   desc:"Burns all available energy on appearing okay and capable — leaving nothing for the actual work of reaching the goal.",
-   tips:["Identify one area this week where you can drop the performance — even slightly. Let one person see that you're figuring something out. Unmasking in small doses builds the muscle.","At the end of each day, notice how much energy went to managing appearances vs. moving toward your goal. You don't need to change it yet — just see it clearly.","Ask yourself: who am I performing for right now, and what do I think will happen if I stop? The answer usually reveals the exile this part is protecting — and that's the real work."],
-   qs:["I spend so much energy appearing capable and okay to the outside world that by the time I'm alone, there's nothing left for the things I actually want.","The goals that are truly mine — the ones no one is watching — never get the energy they need because all of it goes to keeping up appearances everywhere else.","I've been performing a version of myself for so long that I've genuinely lost touch with what I'm even trying to move toward anymore."]},
-  {id:"procrastinator",name:"The Procrastinator",category:"firefighter",
-   desc:"Intercepts the moment of starting. Not laziness — a protective shutdown that kicks in right when a task matters most, keeping you stuck.",
-   tips:["When you feel the pull away from starting, don't fight it — get curious. Ask: 'What is this part afraid will happen if I start right now?' The answer is usually about failure or shame, not the task itself.","Use a 2-minute rule: commit to doing just 2 minutes of the thing. The Procrastinator's job is to prevent starting — it has no protocol for something this small. Often 2 minutes becomes 20.","Notice the pattern: the stronger the avoidance, the more the task matters. Use avoidance as a compass. High avoidance = high value. That reframe alone can shift your relationship with it."],
-   qs:["The things I avoid most consistently aren't the tasks I don't care about — they're the ones that matter to me the most.","I can feel myself approaching the moment of starting something important — and something in me reliably finds a way to make sure it doesn't happen.","I've watched real windows close on things I genuinely wanted — not because I didn't care, but because something in me couldn't let the start happen."]},
-  {id:"clown",name:"The Clown/Deflector",category:"firefighter",
-   desc:"Redirects attention whenever real progress requires vulnerability — quietly keeping things from moving forward.",
-   tips:["When you notice yourself deflecting with humor or lightness, pause and ask: what was I about to do or say before I made that joke? Go back to that moment — it's usually where the real thing lives.","Practice staying in a serious moment for 30 more seconds than feels comfortable. You don't have to go deep — just don't exit. This builds tolerance for the vulnerability that forward motion requires.","The Deflector isn't bad at reading a room — it's actually very skilled. Try redirecting that skill: use your humor to make vulnerability feel safer for others, not to avoid it yourself."],
-   qs:["When a moment arises that could actually move me closer to what I want, I watch myself make it smaller, funnier, or less serious — and then the moment is gone.","I've talked myself out of the kind of direct, vulnerable action that would actually move me forward by keeping things light and letting the opportunity dissolve.","Seriousness about my own wants feels genuinely uncomfortable — so I deflect, joke, or redirect, and then wonder why nothing changes."]},
-  {id:"shutdown",name:"The Shutdown/Exploder",category:"firefighter",
-   desc:"When the pressure of the gap gets too high, this part either shuts everything down or explodes outward — either way, nothing moves forward.",
-   tips:["Learn your early warning signs — the small signals that a shutdown or explosion is building before it arrives. A tight chest, a specific thought pattern, a sudden urge to cancel everything. Catching it early gives you options.","When you feel the pressure building, reduce the task to its absolute smallest form. Not 'do the work' — 'open the laptop.' Not 'have the conversation' — 'send one sentence.' Small keeps the system from flooding.","After a shutdown, resist the urge to immediately make up for lost time. That pressure is what caused the shutdown in the first place. Start with one small thing and let it be enough."],
-   qs:["There are stretches — sometimes days, sometimes weeks — where I simply cannot access myself enough to do the things I care about. I go flat, and the time disappears.","The pressure of falling behind on something that matters to me doesn't motivate me — it detonates me. I either go completely numb or completely off the rails, and either way I lose more ground.","My hardest shutdowns don't happen when life is calm — they happen at exactly the moment I most need to be moving forward."]},
-  {id:"escapist",name:"The Escapist",category:"firefighter",
-   desc:"Offers instant relief from the discomfort of being stuck — making staying where you are feel tolerable enough to never leave.",
-   tips:["Before you escape, pause for 60 seconds and name what you're escaping from. You don't have to stop — just see it clearly first. Awareness before the escape changes the relationship with it over time.","Notice the timing. If the escape shows up most reliably right before the important thing, that's not coincidence — that's the part doing its job. Use that pattern as a signal to get curious instead of reactive.","Find a smaller escape that still gives relief but costs less time. A 5-minute walk, a song, a snack — something that honors the part's need for relief without handing it the whole afternoon."],
-   qs:["When the gap between where I am and my goal feels unbearable, something in me goes looking for relief — and it always finds it, and the hours disappear.","My escapes aren't random habits. They show up with the most pull right when I'm supposed to be doing the thing that matters most — which tells me something.","Staying stuck has started to feel almost manageable — because the escape is always there, and it works just well enough to make not moving forward feel survivable."]}
-];
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-logo">Neurodivergent Strategies</div>
+  <p class="footer-text">Parts Work Coaching for Neurodivergent Brains</p>
+</footer>
 
-const catLabels={exile:'Exile',manager:'Manager',firefighter:'Firefighter'};
-const catDisplay={exile:'Exile · Wound-carrier',manager:'Manager · Proactive protector',firefighter:'Firefighter · Reactive protector'};
-
-const allQs=[];
-PARTS.forEach(p=>p.qs.forEach(q=>allQs.push({text:q,partId:p.id,category:p.category})));
-
-let current=0;
-const answers=new Array(36).fill(null);
-
-function startQuiz(){
-  document.getElementById('landing').style.display='none';
-  document.getElementById('quiz-page').style.display='block';
-  window.scrollTo(0,0);
-  renderQ();
-}
-
-function renderQ(){
-  const q=allQs[current];
-  const pct=Math.round((current+1)/36*100);
-  document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-label').textContent=`Question ${current+1} of 36`;
-  document.getElementById('nav-counter').textContent=`${current+1} / 36`;
-  const catEl=document.getElementById('q-category');
-  catEl.textContent=catDisplay[q.category];
-  catEl.className='q-category '+q.category;
-  document.getElementById('q-text').textContent=q.text;
-  const opts=document.getElementById('options');
-  opts.innerHTML='';
-  OPTS.forEach((o,i)=>{
-    const b=document.createElement('button');
-    b.className='opt'+(answers[current]===i?' selected':'');
-    b.textContent=o.label;
-    b.onclick=()=>selectOpt(i);
-    opts.appendChild(b);
-  });
-  document.getElementById('btn-back').disabled=current===0;
-  document.getElementById('btn-next').disabled=answers[current]===null;
-  document.getElementById('btn-next').textContent=current===35?'See my results →':'Next →';
-}
-
-function selectOpt(i){
-  answers[current]=i;
-  document.querySelectorAll('.opt').forEach((b,idx)=>b.classList.toggle('selected',idx===i));
-  document.getElementById('btn-next').disabled=false;
-}
-
-function nextQ(){
-  if(current===35){showResults();return;}
-  current++;renderQ();window.scrollTo(0,0);
-}
-
-function prevQ(){
-  if(current>0){current--;renderQ();window.scrollTo(0,0);}
-}
-
-function showResults(){
-  const scores={};
-  PARTS.forEach(p=>scores[p.id]=0);
-  allQs.forEach((q,i)=>{if(answers[i]!==null)scores[q.partId]+=OPTS[answers[i]].points;});
-  const maxScore=12;
-  const ranked=PARTS.map(p=>({...p,score:scores[p.id]})).sort((a,b)=>b.score-a.score).slice(0,3);
-
-  document.getElementById('quiz-page').style.display='none';
-  document.getElementById('results-page').style.display='block';
-  window.scrollTo(0,0);
-
-  const rankLabels=['Your strongest part','Second part','Third part'];
-  const list=document.getElementById('results-list');
-  list.innerHTML='';
-
-  ranked.forEach((p,i)=>{
-    const pct=Math.round(p.score/maxScore*100);
-    const tips=p.tips.map(t=>`<div class="tip-item"><div class="tip-dot"></div><p class="tip-text">${t}</p></div>`).join('');
-    list.innerHTML+=`
-    <div class="result-card ${p.category}">
-      <div class="result-rank">${rankLabels[i]}</div>
-      <div class="result-name">${p.name}</div>
-      <span class="result-type-pill">${catLabels[p.category]}</span>
-      <p class="result-desc">${p.desc}</p>
-      <div class="score-row">
-        <div class="score-bar-bg"><div class="score-bar-fill" style="width:${pct}%"></div></div>
-        <span class="score-pct">${pct}%</span>
-      </div>
-      <div class="tips-heading">Quick tips for working with this part</div>
-      ${tips}
-    </div>`;
-  });
-}
-
-function retake(){
-  current=0;answers.fill(null);
-  document.getElementById('results-page').style.display='none';
-  document.getElementById('landing').style.display='flex';
-  window.scrollTo(0,0);
-}
-</script>
 </body>
 </html>
