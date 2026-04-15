@@ -639,10 +639,12 @@
     <div class="email-icon">&#127775;</div>
     <h1 class="email-title">Your Results Are Ready!</h1>
     <p class="email-subtitle">You just answered all 36 questions. Enter your email below to unlock your personalized Neuro Spicy Parts profile and get actionable strategies sent straight to your inbox.</p>
-    <form class="email-form" onsubmit="submitEmail(event)">
-      <input type="email" class="email-input" id="email-input" placeholder="your@email.com" required>
+    <form class="email-form" name="quiz-email" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEmail(event)">
+      <input type="hidden" name="form-name" value="quiz-email">
+      <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <input type="email" name="email" class="email-input" id="email-input" placeholder="your@email.com" required>
       <label class="tos-label">
-        <input type="checkbox" id="tos-checkbox" class="tos-checkbox">
+        <input type="checkbox" name="tos-agreed" id="tos-checkbox" class="tos-checkbox">
         <span class="tos-text">I agree to the <a href="terms-of-service.html" target="_blank" class="tos-link">Terms of Service</a></span>
       </label>
       <div class="email-error" id="email-error">Please enter a valid email address.</div>
@@ -804,9 +806,24 @@ function submitEmail(e){
     return;
   }
 
-  // Store email (in a real app, send to backend)
-  console.log('Email submitted:',email);
   localStorage.setItem('quiz_email',email);
+
+  const scores={};
+  PARTS.forEach(p=>scores[p.id]=0);
+  allQs.forEach((q,i)=>{if(answers[i]!==null)scores[q.partId]+=OPTS[answers[i]].points;});
+  const topPart=PARTS.map(p=>({...p,score:scores[p.id]})).sort((a,b)=>b.score-a.score)[0];
+
+  fetch('/',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:new URLSearchParams({
+      'form-name':'quiz-email',
+      email,
+      'tos-agreed':'yes',
+      'top-part':topPart.name,
+      scores:JSON.stringify(scores)
+    }).toString()
+  }).catch(err=>console.error('Form submit failed:',err));
 
   showResults();
 }
