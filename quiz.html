@@ -642,6 +642,8 @@
     <form class="email-form" name="quiz-email" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitEmail(event)">
       <input type="hidden" name="form-name" value="quiz-email">
       <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
+      <input type="text" name="first-name" class="email-input" id="first-name-input" placeholder="First name" required>
+      <input type="text" name="last-name" class="email-input" id="last-name-input" placeholder="Last name" required>
       <input type="email" name="email" class="email-input" id="email-input" placeholder="your@email.com" required>
       <label class="tos-label">
         <input type="checkbox" name="tos-agreed" id="tos-checkbox" class="tos-checkbox">
@@ -789,6 +791,8 @@ function showEmailGate(){
 
 function submitEmail(e){
   e.preventDefault();
+  const firstName=document.getElementById('first-name-input').value.trim();
+  const lastName=document.getElementById('last-name-input').value.trim();
   const email=document.getElementById('email-input').value.trim();
   const errorEl=document.getElementById('email-error');
   const tosErrorEl=document.getElementById('tos-error');
@@ -818,6 +822,8 @@ function submitEmail(e){
     headers:{'Content-Type':'application/x-www-form-urlencoded'},
     body:new URLSearchParams({
       'form-name':'quiz-email',
+      'first-name':firstName,
+      'last-name':lastName,
       email,
       'tos-agreed':'yes',
       'top-part':topPart.name,
